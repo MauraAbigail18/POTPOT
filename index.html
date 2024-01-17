@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>POT POT</title>
+
+	<!-- Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,800&display=swap" rel="stylesheet">
+
+	<!-- Feather Icons -->
+	<script src="https://unpkg.com/feather-icons"></script>
+
+	<!-- Style  -->
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="website icon" href="img/logo.png">
+
+	<!-- AlpineJS -->
+	<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+	<!-- App -->
+	<script src="src/app.js"></script>
+</head>
+<body>
+
+<!-- Navbar Start -->
+
+	<nav class="navbar" x-data>
+	<a href="#" class="navbar-logo">POT<span>POT</span></a>	
+
+
+
+	<div class="navbar-nav">
+		<a href="#home">Home</a>
+		<a href="#about">About Us</a>
+		<a href="#menu">Menu</a>
+		<a href="#products">Products</a>
+		<a href="#contact">Contact Us</a>
+	</div>
+
+
+	<div class="navbar-extra">
+		<a href="#" id="search-button"><i data-feather="search"></i></a>
+		<a href="#" id="cart-button">
+			<i data-feather="shopping-cart"></i>
+			<span class="quantity-badge" x-show="$store.cart.quantity" x-text="$store.cart.quantity"></span>
+		</a>
+		<a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+	</div>
+
+	<!-- Search Form Start -->
+
+	<div class="search-form">
+		<input type="search" id="search-box" placeholder="Search Here">
+		<label for="search-box"><i data-feather="search"></i></label>
+	</div>
+
+	<!-- Search Form End -->
+
+	<!-- Shopping Cart Start -->
+
+	<div class="shopping-cart">
+		<template x-for="(item, index) in $store.cart.items" x-keys="index">
+		<div class="cart-item">
+			<img :src="`img/${item.img}`" :alt="item.name">
+			<div class="item-detail">
+				<h3 x-text="item.name"></h3>
+				<div class="item-price">
+					<span x-text="Rupiah(item.price)"></span>&times;
+					<button id="remove" @click="$store.cart.remove(item.id)">&minus;</button>
+					<span x-text="item.quantity"></span>
+					<button id="add" @click="$store.cart.add(item)">&plus;</button> &equals;
+					<span x-text="Rupiah(item.total)"></span>
+				</div>
+			</div>
+		</div>
+	</template>
+
+	<h4 x-show="!$store.cart.items.length" style="margin-top: 1rem;"> Cart is Empty</h4>
+	<h4 x-show="$store.cart.items.length"> Total : <span x-text="Rupiah($store.cart.total)">
+	</span></h4>
+
+	<div class="form-container" x-show="$store.cart.items.length">
+		<form action="" id="checkoutForm">
+			<h5> Customer Detail</h5>
+
+			<label for="name">
+				<span>Name</span>
+				<input type="text" name="name" id="name">
+			</label>
+
+			<label for="email">
+				<span>Email</span>
+				<input type="email" name="email" id="email">
+			</label>
+
+			<label for="phone">
+				<span>Phone</span>
+				<input type="number" name="phone" id="phone" autocomplete="off">
+			</label>
+
+			<button class="checkout-button" type="submit" id="checkout-button">Checkout</button>
+		</form>
+	</div>
+	</div>
+
+	<!-- Shopping Cart End -->
+	</nav>
+<!-- Navbar End -->
+
+<!-- Hero Section start -->
+
+<section class="hero" id="home">
+	<main class="content">
+		<h1>Mari Nikmati <br>Semangkuk Dessert</h1>
+		<p>Manisnya Sejuta Kenangan, <br>Sentuhan Sempurna Di <br>Setiap Gigitan!</p>
+		<a href="#menu" class="cta">Buy Now</a>
+	</main>
+</section>
+
+<!-- Hero Section end -->
+
+<!-- About Sections start -->
+
+<section id="about" class="about">
+	<h2>About Us</h2>
+
+
+	<div class="row">
+		<div class="about-img">
+			<img src="img/About-us.png" alt="About Us" style="width: 550px;height: 350px;">
+		</div>
+		<div class="content">
+			<h3>Apa Itu POT POT?</h3>
+			<p>POT POT adalah bisnis online yang banyak menjual hidangan penutup seperti pudding dan salad. POT POT sendiri berdiri pada era pandemi, yakni pada tahun 2021 lalu.</p>
+			
+		</div>
+	</div>
+</section>
+
+<!-- About Sections end -->
+
+<!-- Menu Sections start -->
+	<section id="menu" class="menu">
+	<h2>Menu</h2>
+	<p>Nikmati kelezatan setiap suapan dengan sentuhan kelembutan dari kelezatan pudding yang lembut dan keanekaragaman rasa dalam sajian salad buah kami.</p>
+
+	<div class="row">
+		<div class="menu-card">
+			<img src="img/caramelchocolate-pudding.png" alt="cc-p" class="menu-card-img">
+			<h3 class="menu-card-title"> Caramel Chocolate Pudding </h3>
+			<p class="menu-card-price">IDR 160K</p>
+		</div>
+		<div class="menu-card">
+			<img src="img/regal-pudding.png" alt="r-p" class="menu-card-img">
+			<h3 class="menu-card-title"> Marie Regal Pudding </h3>
+			<p class="menu-card-price">IDR 170K</p>
+		</div>
+		<div class="menu-card">
+			<img src="img/teddybear-pudding.png" alt="tb-p" class="menu-card-img">
+			<h3 class="menu-card-title"> Teddy Bear Pudding </h3>
+			<p class="menu-card-price">IDR 185K</p>
+		</div>
+		<div class="menu-card">
+			<img src="img/mango-sagoo.png" alt="m-s" class="menu-card-img">
+			<h3 class="menu-card-title"> Mango Sagoo </h3>
+			<p class="menu-card-price">IDR 25K</p>
+		</div>
+		<div class="menu-card">
+			<img src="img/pandanbutter-pudding.png" alt="pb-p" class="menu-card-img">
+			<h3 class="menu-card-title"> Pandan Butter Pudding </h3>
+			<p class="menu-card-price">IDR 175K</p>
+		</div>
+		<div class="menu-card">
+			<img src="img/salad-buah.png" alt="s-b" class="menu-card-img">
+			<h3 class="menu-card-title"> Fruit Salad Premium </h3>
+			<p class="menu-card-price">IDR 40K</p>
+		</div>
+	</div>
+	</section>
+<!-- Menu Sections end -->
+
+<!-- Product Secions start -->
+
+<section class="products" id="products" x-data="products">
+	<h2>Best Seller Product</h2>	
+	<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores vitae odit non ipsa. Vero, aut!</p>
+	<div class="row">
+		<template x-for="(item, index) in items" x-key="index">
+		<div class="product-card">
+			<div class="products-icon">
+				<a href="#" @click.prevent="$store.cart.add(item)"><svg
+					width="24"
+					height="24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				  >
+					<use href="img/feather-sprite.svg#shopping-cart" />
+				  </svg></a>
+				<a href="#" class="item-detail-button"><svg
+					width="24"
+					height="24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				  >
+					<use href="img/feather-sprite.svg#eye" />
+				  </svg></a>
+			</div>
+			<div class="product-image">
+				<img :src="`img/${item.img}`" :alt="item.name">
+			</div>
+			<div class="product-content">
+				<h3 x-text="item.name"></h3>
+				<div class="product-stars">
+					<svg
+					width="24"
+					height="24"
+					fill="currentColor"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				  >
+					<use href="img/feather-sprite.svg#star" />
+				  </svg>
+				  <svg
+					width="24"
+					height="24"
+					fill="currentColor"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				  >
+					<use href="img/feather-sprite.svg#star" />
+				  </svg>
+				  <svg
+					width="24"
+					height="24"
+					fill="currentColor"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				  >
+					<use href="img/feather-sprite.svg#star" />
+				  </svg>
+				  <svg
+					width="24"
+					height="24"
+					fill="currentColor"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				  >
+					<use href="img/feather-sprite.svg#star" />
+				  </svg>
+				  <svg
+					width="24"
+					height="24"
+					fill="currentColor"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				  >
+					<use href="img/feather-sprite.svg#star" />
+				  </svg>
+				</div>
+				<div class="product-price"><span x-text="Rupiah(item.price)"></span></div>
+			</div>
+		</div>
+	</template></div>
+</section>
+
+<!-- Product Secions end -->
+
+<!-- Contact Sections start -->
+
+<section id="contact" class="contact">
+	<h2>Contact Us</h2>
+	<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint, quod.</p>
+
+	<div class="row">
+		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126748.56400425771!2d107.5607541238507!3d-6.903442379176569!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e6398252477f%3A0x146a1f93d3e815b2!2sBandung%2C%20Bandung%20City%2C%20West%20Java!5e0!3m2!1sen!2sid!4v1700151559941!5m2!1sen!2sid" width="800" height="600" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="map"></iframe>
+
+		<form action="">
+			<div class="input-group">
+			<i data-feather="user"></i>
+			<input type="text" placeholder="Nama">	
+			</div>
+			<div class="input-group">
+			<i data-feather="mail"></i>
+			<input type="text" placeholder="E-mail">	
+			</div>
+			<div class="input-group">
+			<i data-feather="phone"></i>
+			<input type="text" placeholder="Nomor Telepon">	
+			</div>
+			<button type="submit" class="btn">Send</button>
+		</form>
+	</div>
+</section>
+
+<!-- Contact Sections end -->
+
+<!-- Footer Sections start -->
+
+	<footer>
+		<div class="social">
+			<a href="https://instagram.com/thisis_potpot?igshid=M2RkZGJiMzhjOQ==" target="_blank"><i data-feather="instagram"></i></a>
+		</div>
+		<div class="link">
+			<a href="#home">Home</a>
+			<a href="#about">About Us</a>
+			<a href="#menu">Menu</a>
+			<a href="#contact">Contact Us</a>
+		</div>
+		<div class="credit">
+			<p>Created by <a>POTPOT</a>. | &copy; 2023.</p>
+		</div>
+	</footer>
+
+<!-- Footer Sections end -->
+
+<!-- Modal Box Item Detail Start -->
+<div class="modal" id="item-detail-modal">
+	<div class="modal-container">
+		<a href="#" data-feather="x" class="close-icon"></a>
+		<div class="modal-content">
+			<img src="img/teddybear-pudding.png" alt="product1">
+			<div class="product-content">
+				<h3>Teddy Bear Pudding</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam nihil, at quam expedita, adipisci, illum distinctio laboriosam eius dolore recusandae rerum ex doloremque deleniti assumenda dicta impedit mollitia! Ad consectetur eaque dolore minus, nisi iusto?</p>
+				<div class="product-stars">
+					<i data-feather="star" class="star-full"></i>
+					<i data-feather="star" class="star-full"></i>
+					<i data-feather="star" class="star-full"></i>
+					<i data-feather="star" class="star-full"></i>
+					<i data-feather="star" class="star-full"></i>
+				</div>
+				<div class="product-price">IDR 165K <span>IDR 185K</span></div>
+				<a href="#"><i data-feather="shopping-cart"></i> <span>add to cart</span></a>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal Box Item Detail End -->
+
+<!-- Feather Icons -->
+<script>
+      feather.replace();
+    </script>	
+
+<!-- My Js -->
+<script src="js/script.js"></script>
+</body>
+</html>
